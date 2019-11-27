@@ -6,14 +6,16 @@ from apps.endpoints.views import MLAlgorithmViewSet
 from apps.endpoints.views import MLAlgorithmStatusViewSet
 from apps.endpoints.views import MLRequestViewSet
 
+
+
 router =DefaultRouter(trailing_slash=True)
 router.register(r'endpoints', EndpointViewSet, basename='endpoints')
 router.register(r'mlalgorithms', MLAlgorithmViewSet, basename='mlalgorithms')
-routers.register(r'mlalgorithmstatuses', MLAlgorithmStatusViewSet, basename='mlalgorithmstatuses')
-routers.register(r'mlrequests', MLRequestViewSet, basename='mlrequests')
+router.register(r'mlalgorithmstatuses', MLAlgorithmStatusViewSet, basename='mlalgorithmstatuses')
+router.register(r'mlrequests', MLRequestViewSet, basename='mlrequests')
 
 
 # http://<server-ip>/api/v1/<object-name>
-urlpatters = [
+urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
 ]

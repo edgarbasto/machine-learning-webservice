@@ -23,7 +23,7 @@ class EndpointViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets
     queryset = Endpoint.objects.all()
 
 
-class MLAlgoritmViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+class MLAlgorithmViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = MLAlgorithmSerializer
     queryset = MLAlgorithm.objects.all()
 
@@ -42,8 +42,11 @@ class MLAlgorithmStatusViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
         try:
             with transaction.atomic():
                 instance = serializer.save(active=True)
+                # set active=False for other statuses
                 deactivate_other_statuses(instance)
-        
+
+
+
         except Exception as e:
             raise APIException(str(e))
 
@@ -51,4 +54,3 @@ class MLAlgorithmStatusViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
 class MLRequestViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet, mixins.UpdateModelMixin):
     serializer_class = MLRequestSerializer
     queryset = MLRequest.objects.all()
-    
