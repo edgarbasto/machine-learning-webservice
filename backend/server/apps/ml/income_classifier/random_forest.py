@@ -2,9 +2,9 @@
 import joblib
 import pandas as pd
 
-class RandomForestClassifier:
+class RandomForestClassifier():
     def __init__(self):
-        path_to_artifacts = '../../research'
+        path_to_artifacts = '../../research/'
         self.values_fill_missing = joblib.load(path_to_artifacts + 'train_mode.joblib')
         self.encoders = joblib.load(path_to_artifacts + 'encoders.joblib')
         self.model = joblib.load(path_to_artifacts + 'random_forest.joblib')
