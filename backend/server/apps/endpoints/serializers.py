@@ -10,7 +10,7 @@ class EndpointSerializer(serializers.ModelSerializer):
     class Meta:
         model = Endpoint
         read_only_fields = ('id', 'name', 'owner', 'created_at')
-        files = read_only_fields
+        fields = read_only_fields
 
 
 class MLAlgorithmSerializer(serializers.ModelSerializer):

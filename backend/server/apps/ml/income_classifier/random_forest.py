@@ -2,9 +2,11 @@
 import joblib
 import pandas as pd
 
+
 class RandomForestClassifier():
     def __init__(self):
         path_to_artifacts = '../../research/'
+        #path_to_artifacts = 'C:/Users/EdgarBasto/Documents/EB/machine-learning-webservice/research/'
         self.values_fill_missing = joblib.load(path_to_artifacts + 'train_mode.joblib')
         self.encoders = joblib.load(path_to_artifacts + 'encoders.joblib')
         self.model = joblib.load(path_to_artifacts + 'random_forest.joblib')
@@ -15,7 +17,8 @@ class RandomForestClassifier():
         #fill missing values
         input_data.fillna(self.values_fill_missing)
         #conver categoricals
-        dataset_columns = ['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country']
+        dataset_columns = ['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race', 'sex',
+                           'native-country']
         for column in dataset_columns:
             categorical_convert = self.encoders[column]
             input_data[column] = categorical_convert.transform(input_data[column])
